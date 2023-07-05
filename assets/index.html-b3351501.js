@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-ffecde9e","path":"/accumulation/","title":"积累","lang":"zh-CN","frontmatter":{"lastUpdated":false,"editLink":false,"contributors":false},"headers":[],"git":{"updatedTime":1688563301000,"contributors":[{"name":"狮子","email":"hzr1642921219@163.com","commits":1}]},"filePathRelative":"accumulation/index.md"}');export{e as data};
