@@ -13,6 +13,6 @@ git init
 git add -A
 git commit -m 'update: blog'
 
-git push -f git@github.com:leoleor/Lion_Blog.git master:gh-pages
+git push -f git@github.com:leoleor/My_Blog.git master:gh-pages
 
 cd -

@@ -2,11 +2,11 @@ import { defaultTheme } from '@vuepress/theme-default'
 import { searchPlugin } from '@vuepress/plugin-search'
 
 export default {
-  base: '/Lion_Blog/',
+  base: '/My_Blog/',
   lang: 'zh-CN',
   title: '一只攻城狮',
   description: '谁在怀念 怀念从前',
-  head: [['link', { rel: 'icon', href: '/Lion_Blog/images/favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: '/My_Blog/images/favicon.ico' }]],
 
   theme: defaultTheme({
     // logo: '/images/leo.jpeg',
@@ -50,7 +50,7 @@ export default {
       ],
     },
     editLinkText: '帮助我改善这个页面',
-    docsRepo: 'https://github.com/leoleor/Lion_Blog',
+    docsRepo: 'https://github.com/leoleor/My_Blog',
     docsBranch: 'master',
     docsDir: 'docs',
     lastUpdatedText: '最后更新时间',
