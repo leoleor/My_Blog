@@ -77,21 +77,31 @@ jobs:
       #     FOLDER: docs/.vuepress/dist
 
       # 部署云服务器
-      - name: Upload to Deploy Server
-        uses: easingthemes/ssh-deploy@v2.0.7
-        env:
-          # 免密登录的秘钥
-          SSH_PRIVATE_KEY: ${{ secrets.D_PASS }}
-          # 服务器登录用户名
-          REMOTE_USER: ${{ secrets.D_USER }}
-          # 服务器的公网IP
-          REMOTE_HOST: ${{ secrets.D_HOST }}
-          # 你打包后产物的文件夹
-          SOURCE: "docs/.vuepress/dist"
-          # 先清空目标目录
-          ARGS: "-avzr --delete"
-          # 上传到服务器目标目录
-          TARGET: "/www/mysite"
+      # - name: Upload to Deploy Server
+      #   uses: easingthemes/ssh-deploy@v2.0.7
+      #   env:
+      #     # 免密登录的秘钥
+      #     SSH_PRIVATE_KEY: ${{ secrets.D_PASS }}
+      #     # 服务器登录用户名
+      #     REMOTE_USER: ${{ secrets.D_USER }}
+      #     # 服务器的公网IP
+      #     REMOTE_HOST: ${{ secrets.D_HOST }}
+      #     # 你打包后产物的文件夹
+      #     SOURCE: "docs/.vuepress/dist"
+      #     # 先清空目标目录
+      #     ARGS: "-avzr --delete"
+      #     # 上传到服务器目标目录
+      #     TARGET: "/www/mysite"
+
+      # 部署云服务器
+      - name: Upload files to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.D_HOST }} # 服务器域名
+          username: ${{ secrets.D_USER }} # 腾讯云默认用户名为root
+          key: ${{ secrets.D_PASS }} # 本地.ssh文件下的私钥id_rsa
+          source: "docs/.vuepress/dist" # 你打包后产物的文件夹
+          target: "/www/mysite" # 上传到服务器目标目录
 
       # 缓存 node_modules
       # - name: Cache dependencies
