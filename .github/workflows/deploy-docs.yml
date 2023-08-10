@@ -19,7 +19,8 @@ jobs:
     name: build-and-deploy
 
     # 运行所需要的虚拟机环境
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     # 每个任务下的运行步骤，短横杠 - 表示一个步骤，从上至下依次执行。
     steps:
@@ -84,6 +85,7 @@ jobs:
       #     # 上传到服务器目标目录
       #     TARGET: "/www/mysite"
 
+      # https://github.com/easingthemes/ssh-deploy/issues/90
       # 部署云服务器
       - name: Deploy to Tencent Cloud
         uses: easingthemes/ssh-deploy@v2.1.5
@@ -94,4 +96,3 @@ jobs:
           REMOTE_HOST: ${{ secrets.D_HOST }}
           REMOTE_USER: ${{ secrets.D_USER }}
           TARGET: /www/mysite
-          REMOTE_PORT: 22 -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa
