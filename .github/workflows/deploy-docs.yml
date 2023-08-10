@@ -94,3 +94,4 @@ jobs:
           REMOTE_HOST: ${{ secrets.D_HOST }}
           REMOTE_USER: ${{ secrets.D_USER }}
           TARGET: /www/mysite
+          REMOTE_PORT: 22 -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa
