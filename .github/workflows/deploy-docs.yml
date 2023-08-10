@@ -37,16 +37,7 @@ jobs:
           # 选择要使用的 node 版本
           node-version: '16'
 
-      # - name: Cache dependencies
-      #   uses: actions/cache@v2
-      #   id: yarn-cache
-      #   with:
-      #     path: |
-      #       **/node_modules
-      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-yarn-
-
+      # npm 缓存
       - name: Cache NPM dependencies
         uses: actions/cache@v1
         with:
@@ -63,10 +54,10 @@ jobs:
         run: npm install
 
       # 运行构建脚本
-      # - name: Run Build Script
-      #   run: npm run build
+      - name: Run Build Script
+        run: npm run build
 
-      # # 部署到 GitHub Pages
+      # 部署到 GitHub Pages
       # - name: Deploy to GitHub Pages
       #   # uses: JamesIves/github-pages-deploy-action@releases/v3
       #   uses: JamesIves/github-pages-deploy-action@v4
@@ -94,36 +85,12 @@ jobs:
       #     TARGET: "/www/mysite"
 
       # 部署云服务器
-      - name: Upload files to server
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.D_HOST }} # 服务器域名
-          username: ${{ secrets.D_USER }} # 腾讯云默认用户名为root
-          key: ${{ secrets.D_PASS }} # 本地.ssh文件下的私钥id_rsa
-          source: "docs/.vuepress/dist" # 你打包后产物的文件夹
-          target: "/www/mysite" # 上传到服务器目标目录
-
-      # 缓存 node_modules
-      # - name: Cache dependencies
-      #   uses: actions/cache@v2
-      #   id: yarn-cache
-      #   with:
-      #     path: |
-      #       **/node_modules
-      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/package-lock.json') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-yarn-
-
-      # 部署到 GitHub Pages
-      # - name: Deploy to GitHub Pages
-      #   uses: crazy-max/ghaction-github-pages@v2
-      #   with:
-      #     # 将要部署资产的 GitHub 存储库（默认$GITHUB_REPOSITORY）
-      #     repo: leoleor/leo
-      #     # 部署到 gh-pages 分支
-      #     target_branch: gh-pages
-      #     # 打包后的资源路径
-      #     build_dir: docs/.vuepress/dist
-      #   env:
-      #     # 这个 ACCESS_TOKEN 是根据你自己仓库里设置的字段来配置的，不要照搬
-      #     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      - name: Deploy to Tencent Cloud
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.D_PASS }}
+          ARGS: '-rltgoDzvO --delete'
+          SOURCE: "docs/.vuepress/dist"
+          REMOTE_HOST: ${{ secrets.D_HOST }}
+          REMOTE_USER: ${{ secrets.D_USER }}
+          TARGET: /www/mysite
