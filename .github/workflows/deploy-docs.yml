@@ -95,8 +95,6 @@ jobs:
           SOURCE: "docs/.vuepress/dist"
           REMOTE_HOST: ${{ secrets.D_HOST }}
           REMOTE_USER: ${{ secrets.D_USER }}
-          # REMOTE_PORT: 22 -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa
-          # SCRIPT_BEFORE: ls
           TARGET: /www/mysite
           SCRIPT_BEFORE: |
             whoami

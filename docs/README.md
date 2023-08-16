@@ -4,7 +4,7 @@ heroImage: /images/剑姬.jpg
 heroImageDark: /images/剑姬.jpg
 
 actions:
-  - text: 开启前端旅程
+  - text: 开启前端旅程1
     link: ''
     type: primary
   # - text: 项目简介
