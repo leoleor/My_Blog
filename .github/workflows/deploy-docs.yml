@@ -68,33 +68,22 @@ jobs:
       #     Branch: gh-pages
       #     FOLDER: docs/.vuepress/dist
 
-      # 部署云服务器
-      # - name: Upload to Deploy Server
-      #   uses: easingthemes/ssh-deploy@v2.0.7
-      #   env:
-      #     # 免密登录的秘钥
-      #     SSH_PRIVATE_KEY: ${{ secrets.D_PASS }}
-      #     # 服务器登录用户名
-      #     REMOTE_USER: ${{ secrets.D_USER }}
-      #     # 服务器的公网IP
-      #     REMOTE_HOST: ${{ secrets.D_HOST }}
-      #     # 你打包后产物的文件夹
-      #     SOURCE: "docs/.vuepress/dist"
-      #     # 先清空目标目录
-      #     ARGS: "-avzr --delete"
-      #     # 上传到服务器目标目录
-      #     TARGET: "/www/mysite"
-
       # https://github.com/easingthemes/ssh-deploy/issues/90
-      # 部署云服务器
-      - name: Deploy to Tencent Cloud
+      # 上传云服务器
+      - name: Upload to Deploy Server
         uses: easingthemes/ssh-deploy@main
         env:
+          # 服务器的私钥
           SSH_PRIVATE_KEY: ${{ secrets.D_PASS }}
-          ARGS: '-avzr --delete'
-          SOURCE: "docs/.vuepress/dist"
+          # 服务器公网ip
           REMOTE_HOST: ${{ secrets.D_HOST }}
+          # 服务器用户名
           REMOTE_USER: ${{ secrets.D_USER }}
+          # 先清空目标目录
+          ARGS: '-avzr --delete'
+          # 打包后输出的文件
+          SOURCE: "docs/.vuepress/dist"
+          # 上传到服务器路径
           TARGET: /www/mysite
           SCRIPT_BEFORE: |
             whoami
